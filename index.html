@@ -1,0 +1,60 @@
+<html ng-app='imdb'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>IMDB</title>
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/angular.js"></script>
+		<!--app-->
+		<script src="app/imdb.js"></script>
+
+		<!--controllers-->
+		<script src="app/controllers/searchactors.js"></script>
+		<script src="app/controllers/searchmovies.js"></script>
+
+	</head>
+	<body>
+
+		<div class="qw" ng-controller="searchactors">
+		Search actor...	<input ng-model='searchName' ng-change="getActors()" />
+			<br>
+			<br>
+			<li ng-repeat="r in results">
+				Name:{{r.name}}
+				<br>
+				<br>
+				<img ng-src="http://image.tmdb.org/t/p/w500/{{r.profile_path}}?api_key=d2835b6af82dc1f92d2f6235d66d3823" width=150px; height=200px;/>
+
+				<button ng-click="getdata(r.id)">
+					movies by actor</button>
+					<ul>
+					<li ng-repeat="c in result">
+						{{c.original_title}}
+					</li>
+				</ul>
+				<br>
+				<hr>
+			</li>
+
+		</div>
+
+		<div class="qw" ng-controller="searchmovies">
+			Search movie...	<input ng-model='searchM' ng-change="getMovies()" />
+			<br>
+			<br>
+			<div ng-repeat="r in results">
+				Name:{{r.original_title}}
+				<br>
+				<br>
+				<img ng-src="http://image.tmdb.org/t/p/w500/{{r.poster_path}}?api_key=d2835b6af82dc1f92d2f6235d66d3823" width=150px; height=200px;/>
+				<button ng-click="getdata(r.id)">
+					actors in movie</button>
+					<div ng-repeat="c in result">
+						{{c.name}}
+					</div>
+					<br>
+				<hr>
+		</div>
+		</div>
+
+	</body>
+</html>
